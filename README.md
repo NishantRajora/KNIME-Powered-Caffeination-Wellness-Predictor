@@ -1,55 +1,177 @@
-# ☕ Coffee and Health Analytics: A KNIME Predictive Project
+# Coffee and Health Analytics: A KNIME Predictive Modeling Project
 
-## 📜 Project Overview
+## Overview
 
-This project utilizes the **KNIME Analytics Platform** to conduct a comprehensive analysis and predictive modeling study using the **Global Coffee Health Dataset**. The primary goal is to explore the complex relationship between coffee consumption, demographic factors, and various health and sleep outcomes.
+This project leverages the KNIME Analytics Platform to perform a comprehensive predictive analysis using the Global Coffee Health Dataset.  
 
-The workflow is structured to address both **classification** (predicting categories) and **regression** (predicting numerical values) problems, alongside basic exploratory data analysis (EDA).
+The primary objective is to investigate the relationship between coffee consumption, demographic characteristics, and health and sleep outcomes using both classification and regression techniques.
+
+The workflow integrates:
+
+- Data preprocessing and feature preparation  
+- Supervised learning (classification and regression)  
+- Model comparison and evaluation  
+- Unsupervised learning for behavioral segmentation  
+- Exploratory data visualization  
+
+The project demonstrates the practical implementation of end-to-end analytics workflows within a visual data science environment.
 
 ---
 
-## ⚙️ Workflow Segments & Model Performance
+## Project Objectives
 
-The KNIME workflow is partitioned into multiple concurrent paths to train and evaluate distinct models for various targets.
+- Predict health severity categories using demographic and lifestyle variables  
+- Classify sleep quality based on coffee intake and related features  
+- Predict numerical outcomes such as sleeping hours and coffee intake  
+- Identify behavioral clusters using unsupervised learning  
+- Compare performance of multiple machine learning algorithms  
 
-### 1. Classification Tasks (Predicting Quality/Status)
+---
 
-These models predict categorical outcomes like health severity and sleep rating.
+## Dataset
+
+Source: Kaggle (Global Coffee Health Dataset)  
+
+The dataset includes demographic, lifestyle, and health-related attributes such as:
+
+- Age  
+- Gender  
+- Coffee intake (cups per day)  
+- Sleep duration  
+- Sleep quality rating  
+- Health issue category  
+- Additional lifestyle variables  
+
+The dataset enables both categorical prediction tasks and continuous outcome modeling.
+
+---
+
+## Workflow Architecture
+
+The KNIME workflow is divided into parallel modeling paths for different predictive objectives.
+
+### 1. Classification Tasks
+
+These models predict categorical outcomes such as health severity and sleep quality.
 
 | Target Variable | Model Used | Reported Accuracy | Model Type |
-| :--- | :--- | :--- | :--- |
-| **Health Issue** | Random Forest | $\approx 99.65\%$ | Classification |
-| **Health Issue** | Decision Tree | $\approx 99.8\%$ | Classification |
-| **Sleep Quality** | Random Forest | $\approx 98.95\%$ | Classification |
-| **Sleep Quality** | Decision Tree | $\approx 99\%$ | Classification |
-| **Sleep Quality** | Logistic Regression | $\approx 56.4\%$ | Classification (Baseline) |
+|-----------------|------------|------------------|------------|
+| Health Issue | Random Forest | ~99.65% | Classification |
+| Health Issue | Decision Tree | ~99.8% | Classification |
+| Sleep Quality | Random Forest | ~98.95% | Classification |
+| Sleep Quality | Decision Tree | ~99% | Classification |
+| Sleep Quality | Logistic Regression | ~56.4% | Baseline Classification |
 
-*The high accuracy observed in the tree-based models (Random Forest and Decision Tree) suggests a strong, easily separable pattern exists in the data linking lifestyle features to the classified outcomes.*
+Interpretation:
 
-### 2. Regression Tasks (Predicting Numerical Values)
+- Tree-based models significantly outperformed Logistic Regression.  
+- The high accuracy suggests strong separability in feature space.  
+- Random Forest provided stable performance across both targets.  
 
-These models predict continuous, quantitative values using **Linear Regression**.
+---
 
-| Target Variable | Model Used | Evaluation Metric (Numeric Scorer) | Goal |
-| :--- | :--- | :--- | :--- |
-| **Sleeping Hours** | Linear Regression | *Evaluated via Numeric Scorer (e.g., R-squared)* | Predict the average hours of sleep per night. |
-| **Coffee Intake** | Linear Regression | *Evaluated via Numeric Scorer (e.g., R-squared)* | Predict the daily coffee intake (in cups). |
+### 2. Regression Tasks
+
+Linear Regression was implemented for predicting continuous variables.
+
+| Target Variable | Model Used | Evaluation Method | Objective |
+|-----------------|------------|------------------|----------|
+| Sleeping Hours | Linear Regression | Numeric Scorer (R², MAE, etc.) | Estimate daily sleep duration |
+| Coffee Intake | Linear Regression | Numeric Scorer (R², MAE, etc.) | Estimate number of cups consumed |
+
+Insights:
+
+- Regression performance depends on feature correlation strength.  
+- Linear models provide interpretable relationships between predictors and outcomes.  
+
+---
 
 ### 3. Exploratory Data Analysis (EDA)
 
-* **Objective:** To visually segment the population and identify patterns.
-* **Techniques:** K-Means Clustering for segmentation and Scatter Plot visualization.
-* **Analysis:** Investigating the relationship between **Age vs. Coffee Intake** using K-Means to identify clusters with distinct consumption habits.
+Unsupervised learning techniques were applied to explore behavioral segmentation.
+
+Technique Used:
+- K-Means Clustering  
+
+Analysis Focus:
+- Age vs Coffee Intake relationship  
+- Identification of distinct consumption patterns  
+- Visualization through scatter plots  
+
+Outcome:
+
+- Distinct clusters revealed differences in coffee consumption habits across age groups.  
+- Segmentation highlights lifestyle variability within demographic segments.  
 
 ---
 
-## 🛠️ Tools & Technologies
+## Tools and Technologies
 
-* **Primary Tool:** KNIME Analytics Platform
-* **Dataset:** Global Coffee Health Dataset (Kaggle)
-* **Modeling Techniques Used:**
-    * Decision Tree
-    * Random Forest
-    * Logistic Regression
-    * Linear Regression
-    * K-Means Clustering
+- KNIME Analytics Platform  
+- Decision Tree  
+- Random Forest  
+- Logistic Regression  
+- Linear Regression  
+- K-Means Clustering  
+- Numeric Scorer and Confusion Matrix Nodes  
+- Data preprocessing and transformation nodes  
+
+---
+
+## Key Observations
+
+- Tree-based models achieved extremely high accuracy, suggesting structured feature relationships.  
+- Logistic Regression underperformed, indicating possible non-linear decision boundaries.  
+- Regression models demonstrated moderate predictive power for numerical targets.  
+- Clustering revealed interpretable lifestyle segments.  
+- KNIME’s workflow-based modeling enables parallel experimentation and evaluation.  
+
+---
+
+## Learning Outcomes
+
+- Hands-on experience with workflow-based machine learning  
+- Implementation of classification and regression pipelines  
+- Comparative evaluation of multiple algorithms  
+- Application of unsupervised clustering techniques  
+- Interpretation of model metrics within a visual analytics environment  
+
+---
+
+## Limitations
+
+- Synthetic or simplified dataset structure may inflate classification accuracy  
+- Potential overfitting in tree-based models  
+- Further cross-validation and hyperparameter tuning required for production-level reliability  
+
+---
+
+## Future Improvements
+
+- Implement cross-validation loops in KNIME  
+- Perform hyperparameter tuning  
+- Add feature importance analysis  
+- Deploy workflow via KNIME WebPortal  
+- Integrate advanced ensemble or boosting techniques  
+- Conduct fairness or bias analysis  
+
+---
+
+## Repository Structure
+
+```
+Coffee-and-Health-Analytics/
+│
+├── data/
+├── workflow.knwf
+├── results/
+├── screenshots/
+└── README.md
+```
+
+---
+
+## Author
+
+Nishant Rajora   
+Focused on predictive modeling, structured analytics workflows, and practical data science implementation
